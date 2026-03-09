@@ -1,1 +1,57 @@
-<!DOCTYPE html>\n<html lang="en">\n<head>\n    <meta charset="UTF-8">\n    <meta name="viewport" content="width=device-width, initial-scale=1.0">\n    <title>Student Management System</title>\n    <style>\n        body { font-family: Arial, sans-serif; margin: 20px; }\n        table { width: 100%; border-collapse: collapse; margin-top: 20px; }\n        th, td { border: 1px solid #dddddd; text-align: left; padding: 8px; }\n        th { background-color: #f2f2f2; }\n        input[type='text'], input[type='number'] { width: 100%; padding: 8px; }\n        button { padding: 10px 15px; margin-top: 10px; }\n    </style>\n</head>\n<body>\n    <h1>Student Management System</h1>\n    <input type="text" id="studentName" placeholder="Enter Student Name" required>\n    <input type="number" id="studentAge" placeholder="Enter Student Age" required>\n    <button onclick="addStudent()">Add Student</button>\n    <table id="studentTable">\n        <tr>\n            <th>Name</th>\n            <th>Age</th>\n            <th>Actions</th>\n        </tr>\n    </table>\n    <script>\n        let students = [];\n        function addStudent() {\n            const name = document.getElementById('studentName').value;\n            const age = document.getElementById('studentAge').value;\n            if(name && age) {\n                students.push({ name, age });\n                document.getElementById('studentName').value = '';\n                document.getElementById('studentAge').value = '';\n                renderTable();\n            } else {\n                alert('Please fill in both fields.');\n            }\n        }\n        function renderTable() {\n            const table = document.getElementById('studentTable');\n            table.innerHTML = '<tr><th>Name</th><th>Age</th><th>Actions</th></tr>';\n            students.forEach((student, index) => {\n                const row = table.insertRow();\n                row.insertCell(0).innerText = student.name;\n                row.insertCell(1).innerText = student.age;\n                const actionCell = row.insertCell(2);\n                actionCell.innerHTML = '<button onclick="deleteStudent(' + index + ')">Delete</button>';\n            });\n        }\n        function deleteStudent(index) {\n            students.splice(index, 1);\n            renderTable();\n        }\n    <\/script>\n</body>\n</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <title>Student Management System</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #74EBD5, #ACB6E5);
+            font-family: 'Arial', sans-serif;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            text-align: center;
+            margin: 20px 0;
+            font-size: 2.5em;
+            animation: fadeIn 1s;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        .button {
+            background-color: #6200EA;
+            color: white;
+            padding: 10px 20px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .button:hover {
+            background-color: #3700B3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1><i class="fas fa-users"></i> Student Management System</h1>
+        <p>This is a colorful and modern student management system interface with vibrant colors and smooth animations!</p>
+        <button class="button">Add Student</button>
+        <button class="button">View Students</button>
+    </div>
+</body>
+</html>
